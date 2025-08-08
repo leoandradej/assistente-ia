@@ -1,0 +1,223 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: hsl(217, 91%, 60%);
+  --color-primary-dark: hsl(217, 91%, 30%);
+  --color-primary-light: hsl(217, 91%, 80%);
+  --color-secondary: hsl(160, 84%, 39%);
+  --color-secondary-light: hsl(160, 84%, 79%);
+  --color-bg: hsl(210, 20%, 98%);
+  --color-text-primary: hsl(221, 39%, 11%);
+  --color-text-secondary: hsl(218, 11%, 65%);
+  --color-success: hsl(153, 92%, 34%);
+  --color-error: hsl(6, 98%, 48%);
+
+  --text-heading: clamp(2.5rem, 2.2143rem + 1.4286vw, 3.5rem);
+  --text-subheading-primary: clamp(1.5rem, 1.2143rem + 1.4286vw, 2.5rem);
+  --text-large: 1.5rem;
+  --text-regular: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
+  --text-small: 0.875rem;
+}
+
+/* General Settings */
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: "Nunito", sans-serif;
+  font-size: var(--text-regular);
+  line-height: 1.5rem;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+i {
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+}
+
+h1,
+h2 {
+  color: var(--color-primary);
+  line-height: clamp(2.2rem, 1.9714rem + 1.1429vw, 3rem);
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-heading);
+}
+
+h2 {
+  font-size: var(--text-subheading-primary);
+}
+
+label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+textarea {
+  height: 10rem;
+}
+
+input,
+button,
+select,
+textarea {
+  font: inherit;
+  color: var(--color-text);
+}
+
+input,
+select,
+textarea {
+  padding: 0.5rem;
+  border: none;
+  outline: 0.2rem solid var(--color-primary);
+  border-radius: 0.5rem;
+}
+
+input:focus:invalid,
+textarea:focus {
+  outline-color: var(--color-secondary);
+}
+
+input:not(:placeholder-shown):valid {
+  outline-color: var(--color-success);
+}
+
+input:not(:placeholder-shown):invalid {
+  outline-color: var(--color-error);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+section {
+  padding: 1rem;
+  border: 0.2rem solid var(--color-primary);
+  border-radius: 1rem;
+}
+
+footer {
+  text-align: center;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 85%;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Heading */
+
+.logo {
+  width: 30rem;
+}
+
+/* Settings */
+
+.settings__items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.settings__input-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings__error-message {
+  font-size: var(--text-small);
+  color: var(--color-error);
+}
+
+/* User Question */
+
+#question__form {
+  display: grid;
+  gap: 1rem;
+  position: relative;
+}
+
+#question__form > label {
+  font-size: var(--text-subheading-primary);
+}
+
+.btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  font-size: var(--text-regular);
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  padding: 0.75rem;
+  border: 0.125rem solid var(--color-primary);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--color-primary-dark);
+  border: 0.125rem solid var(--color-primary-dark);
+}
+
+/* AI Answer */
+
+.text-displayer {
+  display: none;
+  width: 100%;
+  text-align: center;
+}
+
+.text-displayer__para {
+  background-color: var(--color-primary-light);
+  border: 0.1rem solid var(--color-primary);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.user-question {
+  background-color: var(--color-secondary-light);
+  border-color: var(--color-secondary);
+}
+
+.loader {
+  display: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-top: 3px solid var(--color-primary);
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

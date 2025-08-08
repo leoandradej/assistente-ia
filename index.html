@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>PerguntAI</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <img class="logo" src="./images/logo.png" alt="logo" />
+      </header>
+      <main>
+        <section class="settings">
+          <h2>Configurações</h2>
+          <div class="settings__items">
+            <div class="settings__input-field">
+              <label for="api-key">Chave API</label>
+              <input
+                id="api-key"
+                name="api-key"
+                type="password"
+                placeholder="Insira sua chave API"
+              />
+              <span class="settings__error-message"></span>
+            </div>
+            <div class="settings__input-field settings__ai-model">
+              <label for="ai-model">Modelo IA</label>
+              <select name="ai-model">
+                <option id="ai-model" value="gpt-4.1-nano">GPT-4.1 Nano</option>
+                <option id="ai-model" value="gpt-3.5-turbo">
+                  GPT-3.5 Turbo
+                </option>
+              </select>
+            </div>
+          </div>
+        </section>
+        <section class="question">
+          <form id="question__form">
+            <label for="question">Faça uma pergunta</label>
+            <textarea
+              name="question"
+              id="question"
+              placeholder="Digite sua pergunta aqui..."
+            ></textarea>
+            <button class="btn">Enviar</button>
+          </form>
+        </section>
+        <section class="text-displayer">
+          <span class="loader"></span>
+          <p class="text-displayer__para user-question">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima
+            cupiditate enim, iusto veniam asperiores ea vel eaque consequuntur
+            quidem reiciendis sapiente cumque, aperiam dolore, beatae aliquam
+            accusantium laudantium sint maiores!
+          </p>
+          <p class="text-displayer__para ai-response">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam
+            necessitatibus voluptas expedita nemo nobis quod facere porro totam
+            qui, adipisci a repellat dignissimos fuga veniam delectus,
+            temporibus quam, deleniti dolorum?
+          </p>
+        </section>
+      </main>
+      <footer>Todos os direitos reservados.</footer>
+    </div>
+  </body>
+</html>
