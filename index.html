@@ -15,26 +15,32 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
-        <img class="logo" src="./images/logo.png" alt="logo" />
+      <header class="logo">
+        <img class="logo__icon" src="./images/logo.png" alt="logo" />
+        <div class="logo__text">
+          <h1>PerguntAI</h1>
+          <span>a gente responde</span>
+        </div>
       </header>
       <main>
         <section class="settings">
           <h2>Configurações</h2>
           <div class="settings__items">
-            <div class="settings__input-field">
+            <div class="settings__input-field settings__api-key">
               <label for="api-key">Chave API</label>
               <input
                 id="api-key"
                 name="api-key"
                 type="password"
                 placeholder="Insira sua chave API"
+                minlength="51"
+                required
               />
               <span class="settings__error-message"></span>
             </div>
             <div class="settings__input-field settings__ai-model">
               <label for="ai-model">Modelo IA</label>
-              <select name="ai-model">
+              <select name="ai-model" required>
                 <option id="ai-model" value="gpt-4.1-nano">GPT-4.1 Nano</option>
                 <option id="ai-model" value="gpt-3.5-turbo">
                   GPT-3.5 Turbo
@@ -49,6 +55,7 @@
             <textarea
               name="question"
               id="question"
+              class="question__text"
               placeholder="Digite sua pergunta aqui..."
             ></textarea>
             <button class="btn">Enviar</button>

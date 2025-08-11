@@ -1,9 +1,10 @@
-const apiKey = document.querySelector("#api-key");
-const aiModel = document.querySelector("#ai-model");
-const errorMessage = document.querySelector(".error-message");
-const form = document.querySelector("#form");
+const apiKey = document.querySelector(".settings__api-key");
+const aiModel = document.querySelector(".settings__ai-model");
+const errorMessage = document.querySelector(".settings__error-message");
+const form = document.querySelector("#question__form");
 const url = "https://api.openai.com/v1/chat/completions";
-const question = document.querySelector("#question");
+const question = document.querySelector(".question__text");
+const userQuestion = document.querySelector(".user-question");
 const answer = document.querySelector(".ai-response");
 
 form.addEventListener("submit", (e) => {
