@@ -2,50 +2,99 @@ const apiKey = document.querySelector(".settings__api-key");
 const aiModel = document.querySelector(".settings__ai-model");
 const errorMessage = document.querySelector(".settings__error-message");
 const form = document.querySelector("#question__form");
-const url = "https://api.openai.com/v1/chat/completions";
+const formBtn = document.querySelector(".btn");
+const textDisplayer = document.querySelector(".text-displayer");
+const textDisplayerItems = document.querySelectorAll(".text-displayer__para");
 const question = document.querySelector(".question__text");
 const userQuestion = document.querySelector(".user-question");
 const answer = document.querySelector(".ai-response");
+const loader = document.querySelector(".loader");
+const url = "https://api.openai.com/v1/chat/completions";
+
+const getApiResponse = async (apiKey) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${apiKey}`,
+  };
+
+  const body = {
+    model: aiModel.value,
+    messages: [{ role: "user", content: question.value }],
+    temperature: 0.7,
+  };
+
+  try {
+    textDisplayer.style.display = "flex";
+    if (!loader.classList.contains("active")) {
+      loader.textContent = "";
+      loader.classList.add("active");
+    }
+    const response = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) throw new Error(`API request failed: ${response.status}`);
+
+    const data = await response.json();
+    loader.style.display = "none";
+    textDisplayerItems.forEach((item) => (item.style.display = "block"));
+    userQuestion.textContent = question.value;
+    answer.textContent = data.choices[0].message.content;
+    question.value = "";
+  } catch (error) {
+    console.log("Error fetching from ChatGPT API:", error.message);
+    if (error.message === "API request failed: 401") {
+      errorMessage.textContent = "Chave API inválida, tente novamente";
+    }
+    if (error.message === "API request failed: 429") {
+      loader.classList.remove("active");
+      loader.textContent =
+        "Você excedeu o limite de requisições, por favor tente outro modelo IA.";
+    } else {
+      answer.textContent =
+        "Desculpe, houve um erro processando sua requisição.";
+    }
+  }
+};
+
+question.addEventListener("input", () => {
+  if (question.value.trim() === "") {
+    formBtn.disabled = true;
+  } else {
+    formBtn.disabled = false;
+  }
+});
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  if (errorMessage.textContent !== "") errorMessage.textContent = "";
+
   if (apiKey.value === "") {
     errorMessage.textContent = "Por favor, insira sua chave API";
+  } else if (apiKey.value.length < 51) {
+    errorMessage.textContent =
+      "Sua Chave API precisa conter pelo menos 51 caracteres";
+  } else {
+    getApiResponse(apiKey.value);
   }
+});
 
-  const getApiResponse = async (apiKey) => {
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    };
+form.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
 
-    const body = {
-      model: aiModel.value,
-      messages: [{ role: "user", content: question.value }],
-      temperature: 0.7,
-    };
+    if (question.value === "") return;
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(body),
-      });
-
-      if (!response.ok)
-        throw new Error(`API request failed: ${response.status}`);
-
-      const data = await response.json();
-      answer.textContent = data.choices[0].message.content;
-    } catch (error) {
-      console.log("Error fetching from ChatGPT API:", error.message);
-      answer.textContent =
-        "Desculpe, houve um erro processando sua requisição.";
+    if (apiKey.value === "") {
+      errorMessage.textContent = "Por favor, insira sua chave API";
+    } else if (apiKey.value.length < 51) {
+      errorMessage.textContent =
+        "Sua Chave API precisa conter pelo menos 51 caracteres";
+    } else {
+      getApiResponse(apiKey.value);
     }
-
-    question.textContent = "";
-  };
-
-  getApiResponse(apiKey.value);
+  }
 });

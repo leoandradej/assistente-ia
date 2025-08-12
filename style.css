@@ -5,19 +5,19 @@
 }
 
 :root {
-  --color-primary: #3c83f6;
+  --color-primary: hsl(217, 91%, 60%);
   --color-primary-dark: hsl(217, 91%, 30%);
   --color-primary-light: hsl(217, 91%, 80%);
   --color-secondary: hsl(160, 84%, 39%);
   --color-secondary-dark: hsl(160, 84%, 29%);
-  --color-secondary-light: hsl(160, 84%, 79%);
-  --color-bg: #f9fafb;
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #4b5563;
-  --color-text-disabled: #9ca3af;
-  --color-success: #10b77f;
-  --color-warning: #f59e0b;
-  --color-error: #dc2626;
+  --color-secondary-light: hsl(120, 50%, 80%);
+  --color-bg: hsl(210, 20%, 98%);
+  --color-text-primary: hsl(0, 0%, 10%);
+  --color-text-secondary: hsl(215, 14%, 34%);
+  --color-text-disabled: hsl(218, 11%, 65%);
+  --color-success: hsl(160, 84%, 39%);
+  --color-warning: hsl(38, 92%, 50%);
+  --color-error: hsl(0, 72%, 51%);
 
   --text-heading: clamp(2.5rem, 2.2143rem + 1.4286vw, 3.5rem);
   --text-subheading: clamp(1.5rem, 1.3rem + 1vw, 2.2rem);
@@ -29,6 +29,7 @@
 /* General Settings */
 
 body {
+  min-height: 100vh;
   background: linear-gradient(135deg, #3c83f6, #10b77f);
   background-repeat: no-repeat;
   color: var(--color-text-primary);
@@ -43,8 +44,7 @@ img {
 }
 
 i {
-  color: var(--color-secondary);
-  font-size: 1.5rem;
+  color: var(--color-bg);
 }
 
 h1,
@@ -62,13 +62,17 @@ h2 {
   font-size: var(--text-subheading);
 }
 
+p {
+  margin: 0;
+}
+
 label {
   font-size: var(--text-small);
   font-weight: 700;
 }
 
 textarea:focus {
-  outline-color: var(--color-primary-dark);
+  outline-color: var(--color-secondary);
 }
 
 input,
@@ -85,8 +89,18 @@ textarea {
   background-color: transparent;
 }
 
+select {
+  line-height: 2.5;
+}
+
 textarea {
   height: 10rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding-left: 2.5rem;
 }
 
 input:focus:invalid {
@@ -170,7 +184,25 @@ footer {
   color: var(--color-error);
 }
 
+.input-wrapper {
+  position: relative;
+}
+
+.fa-key,
+.fa-sliders {
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+}
+
 /* User Question */
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
 #question__form {
   display: grid;
@@ -183,38 +215,57 @@ footer {
   line-height: clamp(2.2rem, 1.9714rem + 1.1429vw, 3rem);
 }
 
+.question__hint-message {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
 .btn {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font: inherit;
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 1rem;
+  margin: 0.5rem;
   font-size: var(--text-regular);
   background-color: var(--color-primary);
   color: var(--color-bg);
   padding: 0.75rem;
   border: 0.125rem solid var(--color-primary);
-  border-radius: 1rem;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 200ms ease-in-out;
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: var(--color-primary-dark);
-  border: 0.125rem solid var(--color-primary-dark);
+  background-color: var(--color-secondary);
+  border: 0.125rem solid var(--color-secondary);
+}
+
+.btn:disabled {
+  background-color: var(--color-text-disabled);
+  border: 0.125rem solid var(--color-text-disabled);
+  cursor: not-allowed;
 }
 
 /* AI Answer */
 
 .text-displayer {
-  display: block;
-  width: 100%;
-  text-align: center;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   font-weight: 600;
 }
 
 .text-displayer__para {
+  display: none;
+  width: 100%;
   background-color: var(--color-primary-light);
   border: 0.1rem solid var(--color-primary);
   border-radius: 0.5rem;
@@ -226,8 +277,7 @@ footer {
   border-color: var(--color-secondary);
 }
 
-.loader {
-  display: none;
+.loader.active {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -247,10 +297,6 @@ footer {
 }
 
 @media (min-width: 768px) {
-  body {
-    height: 100vh;
-  }
-
   label {
     font-size: var(--text-regular);
   }
