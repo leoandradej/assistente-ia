@@ -158,6 +158,10 @@ footer {
   width: 5rem;
 }
 
+.logo__text h1 {
+  text-indent: -0.2rem;
+}
+
 .logo__text span {
   font-weight: 700;
   color: var(--color-text-secondary);
