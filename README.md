@@ -7,7 +7,7 @@ desenvolvido em HTML, CSS e JavaScript puro.
 
 ## Live Preview
 
-[View Live Application](https://leoandradej.github.io/assitente-ia/)
+[View Live Application](https://leoandradej.github.io/assistente-ia/)
 
 ## 📌 Funcionalidades
 
