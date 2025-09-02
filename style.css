@@ -219,6 +219,12 @@ footer {
   line-height: clamp(2.2rem, 1.9714rem + 1.1429vw, 3rem);
 }
 
+.question__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .question__hint-message {
   color: var(--color-text-secondary);
   font-weight: 600;
@@ -289,6 +295,13 @@ footer {
   border-right: 3px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+
+.new-question-btn {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 2rem;
+  position: relative;
 }
 
 @keyframes rotation {

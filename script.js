@@ -5,10 +5,13 @@ const form = document.querySelector("#question__form");
 const formBtn = document.querySelector(".btn");
 const textDisplayer = document.querySelector(".text-displayer");
 const textDisplayerItems = document.querySelectorAll(".text-displayer__para");
+const questionSection = document.querySelector(".question");
 const question = document.querySelector(".question__text");
+const charCounter = document.querySelector(".question__charCounter");
 const userQuestion = document.querySelector(".user-question");
 const answer = document.querySelector(".ai-response");
 const loader = document.querySelector(".loader");
+const newQuestionBtn = document.querySelector(".new-question-btn");
 const url = "https://api.openai.com/v1/chat/completions";
 
 const getApiResponse = async (apiKey) => {
@@ -24,7 +27,9 @@ const getApiResponse = async (apiKey) => {
   };
 
   try {
+    questionSection.style.display = "none";
     textDisplayer.style.display = "flex";
+    errorMessage.textContent = "";
     if (!loader.classList.contains("active")) {
       loader.textContent = "";
       loader.classList.add("active");
@@ -60,6 +65,7 @@ const getApiResponse = async (apiKey) => {
 };
 
 question.addEventListener("input", () => {
+  charCounter.textContent = `${question.value.length}/500`;
   if (question.value.trim() === "") {
     formBtn.disabled = true;
   } else {
@@ -76,7 +82,7 @@ form.addEventListener("submit", (e) => {
     errorMessage.textContent = "Por favor, insira sua chave API";
   } else if (apiKey.value.length < 51) {
     errorMessage.textContent =
-      "Sua Chave API precisa conter pelo menos 51 caracteres";
+      "Sua Chave API precisa conter ao menos 51 caracteres";
   } else {
     getApiResponse(apiKey.value);
   }
@@ -97,4 +103,13 @@ form.addEventListener("keydown", (e) => {
       getApiResponse(apiKey.value);
     }
   }
+});
+
+newQuestionBtn.addEventListener("click", () => {
+  questionSection.style.display = "flex";
+  textDisplayer.style.display = "none";
+  textDisplayerItems.forEach((item) => (item.style.display = "none"));
+  loader.style.display = "block";
+  question.value = "";
+  charCounter.textContent = "0/500";
 });

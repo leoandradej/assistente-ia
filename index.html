@@ -72,19 +72,25 @@
               class="question__text"
               placeholder="Digite sua pergunta aqui..."
             ></textarea>
-            <button class="btn" type="submit" disabled>
+            <button class="btn" type="submit" title="Enviar" disabled>
               <i class="fa-solid fa-paper-plane"></i>
             </button>
           </form>
-          <span class="question__hint-message"
-            >Pressione ou clique Enter para enviar, Shift + Enter para uma nova
-            linha</span
-          >
+          <div class="question__info">
+            <span class="question__hint-message"
+              >Pressione ou clique Enter para enviar, Shift + Enter para uma
+              nova linha</span
+            >
+            <span class="question__charCounter">0/500</span>
+          </div>
         </section>
         <section class="text-displayer">
           <span class="loader active"></span>
           <p class="text-displayer__para user-question"></p>
           <p class="text-displayer__para ai-response"></p>
+          <button class="btn new-question-btn" title="Nova Pergunta">
+            Nova Pergunta
+          </button>
         </section>
       </main>
       <footer>© 2025, PerguntAI. Todos os direitos reservados.</footer>
